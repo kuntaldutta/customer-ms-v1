@@ -10,16 +10,16 @@ import com.example.customer.model.Customer;
 @Component
 public class CustomerServiceImpl implements CustomerService {
 
-	private static List<Customer> customer = new ArrayList<>();
+	private static List<Customer> customers = new ArrayList<>();
 
 	static {
-		customer.add(new Customer(1, "Virat", "Kohli", "Bangalore", "virat.kohli@mail.com", "Purchashed"));
+		customers.add(new Customer(1, "Virat", "Kohli", "Bangalore", "virat.kohli@mail.com", "Purchashed"));
 
 	}
 
 	@Override
 	public List<Customer> getAllCustomer() {
-		return customer;
+		return customers;
 	}
 
 	@Override
@@ -30,7 +30,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer findCustomer(int id) {
-		// TODO Auto-generated method stub
+
+		for (Customer customer : customers) {
+			if (customer.getCustomerID() == id)
+				return customer;
+		}
 		return null;
 	}
 
