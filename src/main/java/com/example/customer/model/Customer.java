@@ -2,7 +2,7 @@ package com.example.customer.model;
 
 public class Customer {
 
-	private int customerID;
+	private Integer customerID;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -13,7 +13,8 @@ public class Customer {
 
 	}
 
-	public Customer(int customerID, String firstName, String lastName, String address, String email, String billInfo) {
+	public Customer(Integer customerID, String firstName, String lastName, String address, String email,
+			String billInfo) {
 		super();
 		this.customerID = customerID;
 		this.firstName = firstName;
@@ -23,11 +24,11 @@ public class Customer {
 		this.billInfo = billInfo;
 	}
 
-	public int getCustomerID() {
+	public Integer getCustomerID() {
 		return customerID;
 	}
 
-	public void setCustomerID(int customerID) {
+	public void setCustomerID(Integer customerID) {
 		this.customerID = customerID;
 	}
 

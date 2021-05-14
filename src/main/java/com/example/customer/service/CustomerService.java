@@ -5,10 +5,13 @@ import java.util.List;
 import com.example.customer.model.Customer;
 
 public interface CustomerService {
-	
-	public List<Customer> getAllCustomer();
-	public Customer saveCustomer(Customer customer);
-	public Customer findCustomer(int id);
-	public Customer deleteCustomer(int id);
+
+	public List<Customer> findAll();
+
+	public Customer save(Customer customer);
+
+	public Customer findById(int id);
+
+	public Customer deleteById(int id);
 
 }
