@@ -3,6 +3,8 @@ package com.example.customer.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,31 +24,36 @@ public class CustomerController {
 	private CustomerService cs;
 
 	@GetMapping("/customers")
-	public List<Customer> findAllCustomers() {
+	public ResponseEntity<List<Customer>> findAllCustomers() {
 
-		return cs.findAll();
+		return new ResponseEntity<>(cs.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/customers/{id}")
-	public Customer findCustomerById(@PathVariable int id) {
+	public ResponseEntity<Customer> findCustomerById(@PathVariable int id) {
 
 		Customer customer = cs.findById(id);
 		if (customer == null) {
 			throw new CustomerNotFoundException("id-" + id);
 		}
-		return customer;
+		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 
 	@PostMapping("/customers")
-	public Customer addCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
 
-		return cs.save(customer);
+		return new ResponseEntity<>(cs.save(customer), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/customers/{id}")
-	public Customer deleteCustomerById(@PathVariable int id) {
+	public ResponseEntity<Customer> deleteCustomerById(@PathVariable int id) {
 
-		return cs.deleteById(id);
+		return new ResponseEntity<>(cs.deleteById(id), HttpStatus.OK);
 	}
 
+	@PutMapping(path = "/customers/update")
+	public ResponseEntity<Customer> updateUser(@RequestBody Customer customer) {
+
+		return new ResponseEntity<>(cs.save(customer), HttpStatus.OK);
+	}
 }
