@@ -55,6 +55,9 @@ public class CustomerController {
 	public ResponseEntity<Customer> updateUser(@RequestBody Customer customer, @PathVariable int id) {
 
 		Customer customer1 = cs.findById(id);
+		if (customer1 == null) {
+			throw new CustomerNotFoundException("id-" + id);
+		}
 
 		customer1.setCustomerID(customer.getCustomerID());
 		customer1.setFirstName(customer.getFirstName());
