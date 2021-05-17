@@ -51,9 +51,17 @@ public class CustomerController {
 		return new ResponseEntity<>(cs.deleteById(id), HttpStatus.OK);
 	}
 
-	@PutMapping(path = "/customers/update")
-	public ResponseEntity<Customer> updateUser(@RequestBody Customer customer) {
+	@PutMapping(path = "/customers/update/{id}")
+	public ResponseEntity<Customer> updateUser(@RequestBody Customer customer, @PathVariable int id) {
 
-		return new ResponseEntity<>(cs.save(customer), HttpStatus.OK);
+		Customer customer1 = cs.findById(id);
+
+		customer1.setCustomerID(customer.getCustomerID());
+		customer1.setFirstName(customer.getFirstName());
+		customer1.setLastName(customer.getLastName());
+		customer1.setAddress(customer.getAddress());
+		customer1.setEmail(customer.getEmail());
+		customer1.setBillInfo(customer.getBillInfo());
+		return new ResponseEntity<>(cs.save(customer1), HttpStatus.OK);
 	}
 }
