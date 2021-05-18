@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.customer.exception.CustomerNotFoundException;
 import com.example.customer.model.Customer;
 import com.example.customer.service.CustomerService;
@@ -27,6 +26,7 @@ public class CustomerController {
 	public ResponseEntity<List<Customer>> findAllCustomers() {
 
 		return new ResponseEntity<>(cs.findAll(), HttpStatus.OK);
+
 	}
 
 	@GetMapping("/customers/{id}")
