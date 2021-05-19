@@ -52,19 +52,8 @@ public class CustomerController {
 	}
 
 	@PutMapping(path = "/customers/update/{id}")
-	public ResponseEntity<Customer> updateUser(@RequestBody Customer customer, @PathVariable int id) {
+	public ResponseEntity<Customer> updateCustomerById(@RequestBody Customer customer, @PathVariable int id) {
 
-		Customer customer1 = cs.findById(id);
-		if (customer1 == null) {
-			throw new CustomerNotFoundException("id-" + id);
-		}
-
-		customer1.setCustomerID(customer.getCustomerID());
-		customer1.setFirstName(customer.getFirstName());
-		customer1.setLastName(customer.getLastName());
-		customer1.setAddress(customer.getAddress());
-		customer1.setEmail(customer.getEmail());
-		customer1.setBillInfo(customer.getBillInfo());
-		return new ResponseEntity<>(cs.save(customer1), HttpStatus.OK);
+		return new ResponseEntity<>(cs.updateById(customer, id), HttpStatus.OK);
 	}
 }

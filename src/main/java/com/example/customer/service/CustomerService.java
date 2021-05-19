@@ -13,5 +13,7 @@ public interface CustomerService {
 	public Customer findById(int id);
 
 	public Customer deleteById(int id);
+	
+	public Customer updateById(Customer customer, int id);
 
 }

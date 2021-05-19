@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.example.customer.controller.CustomerController;
+import com.example.customer.exception.CustomerNotFoundException;
 import com.example.customer.model.Customer;
 
 @Component
@@ -61,6 +62,24 @@ public class CustomerServiceImpl implements CustomerService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Customer updateById(Customer customer, int id) {
+
+		Customer customer1 = findById(id);
+		if (customer1 == null) {
+			throw new CustomerNotFoundException("id-" + id);
+		}
+
+		customer1.setCustomerID(customer.getCustomerID());
+		customer1.setFirstName(customer.getFirstName());
+		customer1.setLastName(customer.getLastName());
+		customer1.setAddress(customer.getAddress());
+		customer1.setEmail(customer.getEmail());
+		customer1.setBillInfo(customer.getBillInfo());
+		save(customer1);
+		return customer1;
 	}
 
 }
