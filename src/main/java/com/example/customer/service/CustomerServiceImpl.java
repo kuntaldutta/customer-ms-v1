@@ -98,8 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Map saveV2(Map customer) {
 
 		RestTemplate restTemplate = new RestTemplate();
-		Map<?, ?> mapResponse = restTemplate.postForObject(URL, customer, Map.class);
-		return mapResponse;
+		return restTemplate.postForObject(URL, customer, Map.class);
 	}
 
 	@Override
