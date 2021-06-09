@@ -3,10 +3,12 @@ package com.example.customer.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.customer.controller.CustomerController;
 import com.example.customer.exception.CustomerNotFoundException;
@@ -17,6 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private static List<Customer> customers = new ArrayList<>();
 	private static int customerCount = 3;
+	private static final String URL = "http://localhost:9999/customers/";
 
 	static {
 		customers.add(new Customer(1, "Virat", "Kohli", "Bangalore", "virat.kohli@mail.com", "Purchashed"));
@@ -80,6 +83,31 @@ public class CustomerServiceImpl implements CustomerService {
 		customer1.setBillInfo(customer.getBillInfo());
 		save(customer1);
 		return customer1;
+	}
+
+	@Override
+	public String findAllV2(int id) {
+
+		RestTemplate restTemplate = new RestTemplate();
+		String url = URL + id;
+		Map<?, ?> mapResponse = restTemplate.getForObject(url, Map.class);
+		return (String) mapResponse.get("name");
+	}
+
+	@Override
+	public Map saveV2(Map customer) {
+
+		RestTemplate restTemplate = new RestTemplate();
+		Map<?, ?> mapResponse = restTemplate.postForObject(URL, customer, Map.class);
+		return mapResponse;
+	}
+
+	@Override
+	public void updateByIdV2(Map customer, int id) {
+
+		RestTemplate restTemplate = new RestTemplate();
+		String url = URL + id;
+		restTemplate.put(url, customer);
 	}
 
 }
